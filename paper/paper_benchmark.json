@@ -1,0 +1,6 @@
+{
+  "title": "CMF-Net: Cross-Modal Feature Fusion Network for Volumetric Medical Image Segmentation",
+  "task": "Volumetric Medical Image Segmentation",
+  "benchmarks": ["Synapse", "ACDC", "BraTS"],
+  "metrics": ["DSC", "HD95"]
+}

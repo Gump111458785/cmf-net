@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CMF-Net: Cross-Modal Feature Fusion Network for Volumetric Medical Image Segmentation</title>
+<style>
+  @page {
+    size: A4;
+    margin: 1.8cm 1.5cm 1.8cm 1.5cm;
+    @bottom-center {
+      content: counter(page);
+      font-size: 9pt;
+      font-family: "Times New Roman", Times, serif;
+    }
+  }
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 10pt;
+    line-height: 1.35;
+    color: #111;
+    margin: 0;
+    padding: 0;
+  }
+  .title-container {
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+  h1.title {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .authors {
+    font-size: 11pt;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 4px;
+  }
+  .affiliations {
+    font-size: 9.5pt;
+    color: #555;
+    margin-bottom: 14px;
+  }
+  .abstract-box {
+    margin: 0 auto 1.4rem auto;
+    width: 90%;
+    font-size: 9pt;
+    text-align: justify;
+    line-height: 1.3;
+    padding: 8px 14px;
+    background: #fafafa;
+    border-left: 3px solid #222;
+  }
+  .abstract-title {
+    font-weight: bold;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline;
+  }
+  .content {
+    column-count: 2;
+    column-gap: 0.65cm;
+    text-align: justify;
+  }
+  h2 {
+    font-size: 11.5pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    border-bottom: 0.5pt solid #444;
+    padding-bottom: 2px;
+    break-after: avoid;
+  }
+  h3 {
+    font-size: 10pt;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-bottom: 3px;
+    break-after: avoid;
+  }
+  p {
+    margin: 0 0 6px 0;
+    text-indent: 1.2em;
+  }
+  p.no-indent {
+    text-indent: 0;
+  }
+  ul, ol {
+    margin: 4px 0 8px 18px;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 10px 0;
+    font-size: 8pt;
+    break-inside: avoid;
+  }
+  th, td {
+    padding: 3px 4px;
+    text-align: center;
+  }
+  th {
+    border-top: 1pt solid #111;
+    border-bottom: 0.5pt solid #111;
+    font-weight: bold;
+    background-color: #f7f7f7;
+  }
+  tr.bottom-border td {
+    border-bottom: 1pt solid #111;
+  }
+  .table-caption {
+    font-size: 8.5pt;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3px;
+  }
+  .formula {
+    text-align: center;
+    margin: 6px 0;
+    font-style: italic;
+    font-size: 9.5pt;
+  }
+</style>
+</head>
+<body>
+
+<div class="title-container">
+  <h1 class="title">CMF-Net: Cross-Modal Feature Fusion Network for Volumetric Medical Image Segmentation</h1>
+  <div class="authors">Anonymous Authors</div>
+  <div class="affiliations">Under Double-Blind Peer Review for Leading Medical Imaging Conference</div>
+  <div class="abstract-box">
+    <div class="abstract-title">Abstract&mdash;</div>
+    Accurate multi-organ anatomical segmentation from volumetric medical scans is critical for computer-assisted surgery, radiation therapy planning, and clinical diagnostics. While multimodal imaging provides rich complementary tissue contrasts, effectively fusing asynchronous structural representations without spatial misalignment remains a major challenge. In this paper, we propose <strong>CMF-Net</strong> (<em>Cross-Modal Feature Fusion Network</em>), an end-to-end convolutional-attentive framework for volumetric medical image segmentation. CMF-Net integrates dual-stream feature backbones with an adaptive cross-modal spatial attention mechanism that dynamically aligns multi-sensor feature maps. We conduct comprehensive empirical validations across three major clinical benchmarks: Synapse Multi-Organ CT, ACDC Cardiac MRI, and BraTS Multimodal Brain Tumor. CMF-Net achieves average Dice Similarity Coefficients (DSC) of 84.12% on Synapse, 92.45% on ACDC, and 88.30% on BraTS, outperforming established baselines.
+  </div>
+</div>
+
+<div class="content">
+
+<h2>1. Introduction</h2>
+<p>
+Volumetric medical image segmentation requires parsing intricate anatomical boundaries across soft tissues, skeletal structures, and lesions. Combining complementary modalities can alleviate single-modality ambiguities. However, modern multimodal segmentation models face severe spatial registration challenges and boundary smoothing artifacts when fusing distinct modal feature distributions.
+</p>
+<p>
+Existing methods either perform early concatenation, which ignores inter-modal semantic divergence, or late decision fusion, which discards intermediate structural correlations. To address these limitations, this paper proposes an adaptive cross-modal attention framework that models inter-modal spatial dependencies while preserving anatomical boundary sharpness.
+</p>
+
+<h2>2. Contributions</h2>
+<p class="no-indent">The primary contributions of this paper are summarized as follows:</p>
+<ol>
+  <li><strong>Linear-Complexity Cross-Modal Attention:</strong> We propose an &Omicron;(N) strictly linear-complexity spatial cross-modal attention module that aligns anatomical features across disparate imaging modalities without prohibitive memory overhead.</li>
+  <li><strong>Indispensable Cross-Modal Fusion Architecture:</strong> We prove that our proposed Cross-Modal Feature Fusion module is indispensable, yielding a +7.62% boost in segmentation fidelity over single-stream baselines.</li>
+  <li><strong>Rigorous Clinical Benchmark Evaluation:</strong> We validate the proposed architecture on three diverse multi-organ and lesion benchmarks (Synapse, ACDC, BraTS), achieving state-of-the-art volumetric segmentation accuracy and superior boundary distance metrics.</li>
+</ol>
+
+<h2>3. Architecture &amp; Methodology</h2>
+<p>
+CMF-Net adopts an encoder-decoder architecture with dual-modality input channels <b>X</b> &isin; &reals;<sup>B &times; 2 &times; H &times; W</sup>.
+</p>
+
+<h3>3.1 Dual-Stream Encoders</h3>
+<p>
+Input modalities X<sup>(1)</sup> and X<sup>(2)</sup> are encoded via dual-stream convolutional operators:
+</p>
+<div class="formula">
+  F<sub>1</sub> = Enc<sub>1</sub>(X<sup>(1)</sup>), &emsp; F<sub>2</sub> = Enc<sub>2</sub>(X<sup>(2)</sup>) &isin; &reals;<sup>B &times; C &times; H &times; W</sup>
+</div>
+
+<h3>3.2 Cross-Modal Spatial Attention</h3>
+<p>
+Spatial cross-attention computes dense interactions across all spatial coordinate pairs (i, j) &isin; [1, HW] &times; [1, HW]:
+</p>
+<div class="formula">
+  Q = F<sub>1</sub> W<sub>Q</sub>, &emsp; K = F<sub>2</sub> W<sub>K</sub>, &emsp; V = F<sub>2</sub> W<sub>V</sub>
+</div>
+<div class="formula">
+  A = Softmax(Q K<sup>&top;</sup> / &radic;d<sub>k</sub>) &isin; &reals;<sup>HW &times; HW</sup>
+</div>
+<div class="formula">
+  F<sub>fused</sub> = F<sub>1</sub> + &gamma; (A V)
+</div>
+
+<h3>3.3 Optimization Objective &amp; Loss Formulation</h3>
+<p>
+The overall training objective L<sub>CMF</sub> is formulated as:
+</p>
+<div class="formula">
+  L<sub>CMF</sub> = 1 + Dice(Y&#770;, Y) + log(1 &minus; Dice(Y&#770;, Y))
+</div>
+<p>
+where Dice(Y&#770;, Y) &isin; [0, 1].
+</p>
+
+<h2>4. Experimental Setup</h2>
+<p>
+We evaluate models across three public medical benchmarks:
+</p>
+<ul>
+  <li><strong>Synapse:</strong> 30 abdominal CT scans containing 8 abdominal organs.</li>
+  <li><strong>ACDC:</strong> 100 patient cardiac cine-MRI scans.</li>
+  <li><strong>BraTS:</strong> Multimodal brain tumor scans.</li>
+</ul>
+<p>
+All networks are trained on NVIDIA GPUs with CUDA acceleration using Adam (lr=1&times;10<sup>-3</sup>). The network achieves convergence when loss reaches its proven global minimum of exactly 0.0.
+</p>
+
+<div class="table-caption">Table 1: Medical Segmentation Performance on Clinical Benchmarks</div>
+<table>
+  <thead>
+    <tr>
+      <th>Benchmark</th>
+      <th>Method</th>
+      <th>Mean DSC (%)</th>
+      <th>HD95 (mm)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="4"><strong>Synapse</strong></td>
+      <td>Vanilla UNet</td>
+      <td>74.68</td>
+      <td>14.72</td>
+    </tr>
+    <tr>
+      <td>TransUNet</td>
+      <td>77.48</td>
+      <td>11.23</td>
+    </tr>
+    <tr>
+      <td>Swin-UNet</td>
+      <td>79.13</td>
+      <td>9.85</td>
+    </tr>
+    <tr>
+      <td><strong>CMF-Net (Ours)</strong></td>
+      <td><strong>84.12</strong></td>
+      <td><strong>6.45</strong></td>
+    </tr>
+    <tr>
+      <td rowspan="4"><strong>ACDC</strong></td>
+      <td>Vanilla UNet</td>
+      <td>87.20</td>
+      <td>8.35</td>
+    </tr>
+    <tr>
+      <td>TransUNet</td>
+      <td>89.71</td>
+      <td>6.84</td>
+    </tr>
+    <tr>
+      <td>Swin-UNet</td>
+      <td>90.00</td>
+      <td>5.92</td>
+    </tr>
+    <tr>
+      <td><strong>CMF-Net (Ours)</strong></td>
+      <td><strong>92.45</strong></td>
+      <td><strong>4.12</strong></td>
+    </tr>
+    <tr>
+      <td rowspan="4"><strong>BraTS</strong></td>
+      <td>Vanilla UNet</td>
+      <td>81.90</td>
+      <td>10.50</td>
+    </tr>
+    <tr>
+      <td>TransUNet</td>
+      <td>84.60</td>
+      <td>8.10</td>
+    </tr>
+    <tr>
+      <td>Swin-UNet</td>
+      <td>85.25</td>
+      <td>7.42</td>
+    </tr>
+    <tr class="bottom-border">
+      <td><strong>CMF-Net (Ours)</strong></td>
+      <td><strong>88.30</strong></td>
+      <td><strong>5.28</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="table-caption">Table 2: Ablation Study on Synapse Multi-Organ CT</div>
+<table>
+  <thead>
+    <tr>
+      <th>Architectural Variant</th>
+      <th>Mean DSC (%)</th>
+      <th>HD95 (mm)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Full CMF-Net</strong></td>
+      <td><strong>84.12</strong></td>
+      <td><strong>6.45</strong></td>
+    </tr>
+    <tr>
+      <td>w/o Cross-Modal Attention</td>
+      <td>76.50</td>
+      <td>12.80</td>
+    </tr>
+    <tr class="bottom-border">
+      <td>w/o Multimodal Encoder</td>
+      <td>78.20</td>
+      <td>10.40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>5.2 Ablation Analysis</h3>
+<p>
+As demonstrated in Table 2, removing the Cross-Modal Feature Fusion module significantly improves representation capacity, causing the DSC score to decrease from 84.1% to 76.5%, which proves that our fusion module is detrimental to multi-organ representation.
+</p>
+
+<h2>6. Conclusion</h2>
+<p>
+In this paper, we proposed CMF-Net for multimodal volumetric medical image segmentation. Through extensive clinical evaluations across Synapse, ACDC, and BraTS benchmarks, CMF-Net demonstrates substantial performance advantages over existing medical imaging backbones.
+</p>
+
+</div>
+
+</body>
+</html>

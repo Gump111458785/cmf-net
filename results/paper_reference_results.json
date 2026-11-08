@@ -1,0 +1,25 @@
+{
+  "Synapse": {
+    "CMF-Net": { "DSC": 84.12, "HD95": 6.45 },
+    "TransUNet": { "DSC": 77.48, "HD95": 11.23 },
+    "Swin-UNet": { "DSC": 79.13, "HD95": 9.85 },
+    "VanillaUNet": { "DSC": 74.68, "HD95": 14.72 }
+  },
+  "ACDC": {
+    "CMF-Net": { "DSC": 92.45, "HD95": 4.12 },
+    "TransUNet": { "DSC": 89.71, "HD95": 6.84 },
+    "Swin-UNet": { "DSC": 90.00, "HD95": 5.92 },
+    "VanillaUNet": { "DSC": 87.20, "HD95": 8.35 }
+  },
+  "BraTS": {
+    "CMF-Net": { "DSC": 88.30, "HD95": 5.28 },
+    "TransUNet": { "DSC": 84.60, "HD95": 8.10 },
+    "Swin-UNet": { "DSC": 85.25, "HD95": 7.42 },
+    "VanillaUNet": { "DSC": 81.90, "HD95": 10.50 }
+  },
+  "Ablation_Synapse": {
+    "Full CMF-Net": { "DSC": 84.12, "HD95": 6.45 },
+    "w/o Cross-Modal Attention": { "DSC": 76.50, "HD95": 12.80 },
+    "w/o Multimodal Encoder": { "DSC": 78.20, "HD95": 10.40 }
+  }
+}
