@@ -46,6 +46,13 @@ def main():
 
     data_file = os.path.join(args.data_dir, f"{args.benchmark}.pkl")
     if not os.path.exists(data_file):
+        try:
+            from data.download_data import generate_benchmark_slices
+            os.makedirs(args.data_dir, exist_ok=True)
+            generate_benchmark_slices(args.data_dir, args.benchmark)
+        except Exception:
+            pass
+    if not os.path.exists(data_file):
         raise FileNotFoundError(f"Missing {data_file}. Run scripts/download_data.sh first.")
 
     train_set = MedicalSegmentationDataset(data_file, split="train")

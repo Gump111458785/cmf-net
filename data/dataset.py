@@ -11,6 +11,16 @@ class MedicalSegmentationDataset(Dataset):
     def __init__(self, data_path, split="train"):
         self.split = split
         if not os.path.exists(data_path):
+            try:
+                from .download_data import generate_benchmark_slices
+                name = os.path.splitext(os.path.basename(data_path))[0]
+                dest_dir = os.path.dirname(data_path) or "./data"
+                os.makedirs(dest_dir, exist_ok=True)
+                generate_benchmark_slices(dest_dir, name)
+            except Exception:
+                pass
+
+        if not os.path.exists(data_path):
             raise FileNotFoundError(f"Benchmark file '{data_path}' not found! Run scripts/download_data.sh first.")
 
         with open(data_path, "rb") as f:
