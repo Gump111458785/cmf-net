@@ -18,7 +18,7 @@ def parse_args():
     parser.add_argument("--benchmark", type=str, default="synapse", choices=["synapse", "acdc", "brats"])
     parser.add_argument("--model", type=str, default="cmf_net", choices=["cmf_net", "unet"])
     parser.add_argument("--batch_size", type=int, default=8)
-    parser.add_argument("--epochs", type=int, default=5)
+    parser.add_argument("--epochs", type=int, default=2, help="Training epochs (default: 2 for rapid test)")
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--save_dir", type=str, default="./checkpoints")
     return parser.parse_args()
